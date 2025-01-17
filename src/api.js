@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 
 const api = axios.create({
-  baseURL: "https://be-nc-news-92aj.onrender.com/api",
+  baseURL: 'https://be-nc-news-92aj.onrender.com/api',
 });
 
 function getArticles() {
@@ -17,9 +17,13 @@ function getArticleById(article_id) {
 }
 
 function getComments(article_id) {
-  return api.get(`/articles/${article_id}/comments`).then((response) => {
-    return response.data;
-  });
+  return api
+    .get(`/articles/${article_id}/comments`)
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error fetching comments:', error);
+      throw error;
+    });
 }
 
 export { getArticles, getArticleById, getComments };
